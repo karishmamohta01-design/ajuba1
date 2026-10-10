@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJUBA | Premium Anti-Tarnish Jewelry</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap');
+        
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray-dark: #333333;
+            --gray-text: #666666;
+            --accent: #d4af37;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--white); color: var(--black); -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* 1. Thin Black Top Layout */
+        .announcement-bar {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 8px 15px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* 2. Header (Logo on Left, Nav Center, Icons Right) */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            border-bottom: 1px solid #eaeaea;
+            z-index: 1000;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left { flex: 1; display: flex; justify-content: flex-start; }
+        .logo img { height: 35px; object-fit: contain; }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; letter-spacing: 2px; }
+        
+        .header-center { flex: 2; display: flex; justify-content: center; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--black); transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.6; }
+
+        .header-right { flex: 1; display: flex; justify-content: flex-end; gap: 20px; font-size: 13px; font-weight: 500; text-transform: uppercase; }
+        .header-right span { cursor: pointer; transition: opacity 0.3s; }
+        .header-right span:hover { opacity: 0.6; }
+
+        /* 3. Hero Banner */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://via.placeholder.com/1920x1080/f4f4f4/333333?text=AJUBA+Campaign') center/cover;
+            display: flex;
+            align-items: flex-end;
+            padding: 60px;
+        }
+        .hero-content { background: rgba(255, 255, 255, 0.9); padding: 40px; max-width: 450px; text-align: center; }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 15px; font-weight: 500; }
+        .hero-content p { font-size: 14px; color: var(--gray-text); margin-bottom: 25px; line-height: 1.6; }
+        .btn-solid { background: var(--black); color: var(--white); padding: 12px 35px; text-transform: uppercase; font-size: 12px; font-weight: 600; letter-spacing: 1px; display: inline-block; transition: background 0.3s; }
+        .btn-solid:hover { background: var(--gray-dark); }
+
+        /* 4. Value Propositions */
+        .trust-badges { display: flex; justify-content: center; gap: 60px; padding: 40px 20px; background: var(--gray-light); flex-wrap: wrap; }
+        .badge { text-align: center; }
+        .badge h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .badge p { font-size: 12px; color: var(--gray-text); }
+
+        /* 5. Sections Base */
+        .section-container { max-width: 1400px; margin: 80px auto; padding: 0 40px; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; border-bottom: 1px solid #eaeaea; padding-bottom: 15px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; }
+        .view-all-link { font-size: 12px; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; border-bottom: 1px solid var(--black); padding-bottom: 2px; }
+
+        /* 6. Shop By Category (Circular) */
+        .category-scroll { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none; }
+        .category-scroll::-webkit-scrollbar { display: none; }
+        .category-item { flex: 0 0 auto; text-align: center; width: 140px; cursor: pointer; }
+        .category-item .img-box { width: 140px; height: 140px; border-radius: 50%; background: var(--gray-light); margin-bottom: 15px; overflow: hidden; }
+        .category-item .img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .category-item:hover .img-box img { transform: scale(1.05); }
+        .category-item h3 { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* 7. Product Grid */
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .product-card { cursor: pointer; }
+        .product-image-container { position: relative; aspect-ratio: 4/5; background: var(--gray-light); margin-bottom: 15px; overflow: hidden; }
+        .product-image-container:hover .add-to-cart-overlay { bottom: 0; opacity: 1; }
+        .add-to-cart-overlay { position: absolute; bottom: -20px; left: 0; right: 0; background: rgba(255,255,255,0.95); padding: 15px 0; text-align: center; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0; transition: all 0.3s ease; }
+        .product-info h3 { font-size: 14px; font-weight: 400; margin-bottom: 8px; color: var(--gray-dark); }
+        .product-info p { font-size: 14px; font-weight: 600; }
+
+        /* 8. Footer */
+        footer { background: var(--black); color: var(--white); padding: 80px 40px 40px; margin-top: 80px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand h2 { font-family: 'Playfair Display', serif; font-size: 32px; letter-spacing: 3px; margin-bottom: 20px; }
+        .footer-brand p { font-size: 13px; color: #999; line-height: 1.8; max-width: 300px; }
+        
+        .footer-links h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px; }
+        .footer-links ul li { margin-bottom: 15px; }
+        .footer-links ul li a { font-size: 13px; color: #999; transition: color 0.3s; }
+        .footer-links ul li a:hover { color: var(--white); }
+        
+        .footer-bottom { max-width: 1400px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #666; }
+
+        @media (max-width: 900px) {
+            .header-center { display: none; } /* Hide nav on mobile for simplicity in static file */
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+            .hero { padding: 20px; align-items: center; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Thin Black Layout -->
+    <div class="announcement-bar">
+        Free Express Shipping on Orders Over ₹2000 | 1 Year Warranty on Polish
+    </div>
+
+    <!-- 2. Header -->
+    <header>
+        <div class="header-left">
+            <a href="#" class="logo">
+                <img src="ajuba.png" alt="AJUBA" onerror="this.outerHTML='<span class=\'logo-text\'>AJUBA</span>'">
+            </a>
+        </div>
+        
+        <div class="header-center">
+            <nav class="nav-links">
+                <a href="#">Kadas</a>
+                <a href="#">Pendants</a>
+                <a href="#">Necklaces</a>
+                <a href="#">Earrings</a>
+                <a href="#">Bracelets</a>
+                <a href="#">Rings</a>
+                <a href="#">Gifting</a>
+            </nav>
+        </div>
+        
+        <div class="header-right">
+            <span>Search</span>
+            <span>Profile</span>
+            <span>Cart (0)</span>
+        </div>
+    </header>
+
+    <!-- 3. Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The New Essentials</h1>
+            <p>Discover our latest collection of premium gold-plated and stainless steel jewelry. Designed to be worn every day, everywhere.</p>
+            <a href="#" class="btn-solid">Shop New Arrivals</a>
+        </div>
+    </section>
+
+    <!-- 4. Value Propositions -->
+    <div class="trust-badges">
+        <div class="badge">
+            <h4>Anti-Tarnish</h4>
+            <p>Designed to never fade.</p>
+        </div>
+        <div class="badge">
+            <h4>Hypoallergenic</h4>
+            <p>Safe for sensitive skin.</p>
+        </div>
+        <div class="badge">
+            <h4>Waterproof</h4>
+            <p>Wear it in the shower.</p>
+        </div>
+        <div class="badge">
+            <h4>Premium Quality</h4>
+            <p>Stainless steel & 18k gold plating.</p>
+        </div>
+    </div>
+
+    <!-- 5. Shop By Category -->
+    <section class="section-container">
+        <div class="section-header">
+            <h2>Shop by Category</h2>
+        </div>
+        <div class="category-scroll">
+            <div class="category-item">
+                <div class="img-box"></div>
+                <h3>Kadas</h3>
+            </div>
+            <div class="category-item">
+                <div class="img-box"></div>
+                <h3>Pendants</h3>
+            </div>
+            <div class="category-item">
+                <div class="img-box"></div>
+                <h3>Necklaces</h3>
+            </div>
+            <div class="category-item">
+                <div class="img-box"></div>
+                <h3>Earrings</h3>
+            </div>
+            <div class="category-item">
+                <div class="img-box"></div>
+                <h3>Bracelets</h3>
+            </div>
+            <div class="category-item">
+                <div class="img-box"></div>
+                <h3>Rings</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Trending Now -->
+    <section class="section-container">
+        <div class="section-header">
+            <h2>Trending Now</h2>
+            <a href="#" class="view-all-link">View All</a>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <div class="add-to-cart-overlay">Quick Add</div>
+                </div>
+                <div class="product-info">
+                    <h3>Signature Gold Kada</h3>
+                    <p>₹1,499</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <div class="add-to-cart-overlay">Quick Add</div>
+                </div>
+                <div class="product-info">
+                    <h3>Minimalist Dome Ring</h3>
+                    <p>₹999</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <div class="add-to-cart-overlay">Quick Add</div>
+                </div>
+                <div class="product-info">
+                    <h3>Layered Chain Necklace</h3>
+                    <p>₹2,299</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <div class="add-to-cart-overlay">Quick Add</div>
+                </div>
+                <div class="product-info">
+                    <h3>Classic Hoop Earrings</h3>
+                    <p>₹1,199</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>AJUBA</h2>
+                <p>Redefining everyday luxury. We craft timeless stainless steel and gold-plated jewelry that refuses to fade, letting your confidence shine through effortlessly.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Necklaces & Pendants</a></li>
+                    <li><a href="#">Bracelets & Kadas</a></li>
+                    <li><a href="#">Rings & Earrings</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Jewelry Care</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>AJUBA Club</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 AJUBA Jewelry. All Rights Reserved.</div>
+            <div>Founded by Karishma Mohta</div>
+        </div>
+    </footer>
+
+</body>
+</html>
